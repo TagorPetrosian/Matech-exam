@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, FETCH_PRODUCTS } from './types';
+import { AUTH_USER, AUTH_ERROR, FETCH_PRODUCTS, SUBMIT_PRODUCT } from './types';
 
 export const signup = (formProps, callback) => async dispatch => {
   try {
@@ -41,6 +41,31 @@ export const signout = () => {
 };
 
 export const fetchProducts = () => async dispatch => {
-  const res = await axios.get('http://localhost:3090/main');
+  const res = await axios.get('http://localhost:3090/products');
   dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+};
+
+export const submitProduct = formProps => async dispatch => {
+  const urlOrAsin = formProps.product;
+  let matches;
+  let asin;
+  let regex = new RegExp(
+    'https?://(?:www.|)amazon.com/(?:gp/product|[^/]+/dp|dp)/([^/]+)'
+  );
+  if (urlOrAsin.indexOf('http') !== -1) {
+    matches = urlOrAsin.match(regex);
+    if (matches) {
+      asin = matches[1];
+    }
+  } else {
+    asin = urlOrAsin;
+  }
+
+  // console.log(formProps);
+  const res = await axios.post(
+    `http://localhost:3090/products`,
+    JSON.stringify({ asin: asin })
+  );
+
+  dispatch({ type: SUBMIT_PRODUCT, payload: res.data });
 };

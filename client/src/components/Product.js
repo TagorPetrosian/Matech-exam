@@ -1,20 +1,10 @@
 import React from 'react';
 const Product = ({
-  product: {
-    item,
-    description,
-    price,
-    avgPrice,
-    maxPrice,
-    minPrice,
-    rating,
-    availability
-  }
+  product: { title, price, avgPrice, maxPrice, minPrice, rating, availability }
 }) => {
   return (
     <React.Fragment>
-      <span>{item}</span>
-      <span>{description}</span>
+      <span>{title}</span>
       <span>{price}</span>
       <span>{avgPrice}</span>
       <span>{maxPrice}</span>

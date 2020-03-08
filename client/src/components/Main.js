@@ -3,6 +3,7 @@ import Product from './Product';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../actions';
 import requireAuth from './requireAuth';
+import AddProductBar from './AddProductBar';
 
 class Main extends Component {
   renderProducts() {
@@ -17,17 +18,19 @@ class Main extends Component {
 
   render() {
     return (
-      <div className='table'>
-        <span>Item</span>
-        <span>Description</span>
-        <span>Price</span>
-        <span>Average Price</span>
-        <span>Max Price</span>
-        <span>Min Price</span>
-        <span>Rating</span>
-        <span>Availability</span>
-        {this.renderProducts()}
-      </div>
+      <React.Fragment>
+        <AddProductBar />
+        <div className='table'>
+          <span>Title</span>
+          <span>Price</span>
+          <span>Average Price</span>
+          <span>Max Price</span>
+          <span>Min Price</span>
+          <span>Rating</span>
+          <span>Availability</span>
+          {this.renderProducts()}
+        </div>
+      </React.Fragment>
     );
   }
 }

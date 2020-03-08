@@ -28,7 +28,7 @@ ReactDOM.render(
       <App>
         <Route path='/' exact component={Welcome} />
         <Route path='/signup' component={Signup} />
-        <Route path='/main' component={Main} />
+        <Route path='/products' component={Main} />
         <Route path='/signout' component={Signout} />
         <Route path='/signin' component={Signin} />
       </App>

@@ -40,14 +40,22 @@ fieldset {
 
 .table {
   display: grid;
-  grid-template-columns: 1fr auto repeat(6, 1fr);
+  grid-template-columns: auto repeat(6, 1fr);
   border-top: 1px solid black;
   border-right: 1px solid black;
-  margin-top: 2rem;
+  margin: 3rem;
 }
 
 .table > span {
   padding: 0.5rem 0.25rem;
   border-left: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+.input-product {
+  width: 40rem;
+}
+
+.input-product * {
+  width: 100%;
 }

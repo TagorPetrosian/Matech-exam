@@ -8,6 +8,8 @@ const router = require('./router');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config');
+const cron = require('node-cron');
+const updateProducts = require('./services/cron-jobs');
 
 // DB Setup
 mongoose.connect(config.mongoURI, {
@@ -21,6 +23,17 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
+
+// Setup CRON
+cron.schedule('* * * * *', () => {
+  console.log('running a task every minute');
+  updateProducts();
+});
+
+// cron.schedule('30 2 * * *', () => {
+//   console.log('Running a cron job at 2:30 AM everyday');
+// updateProducts()
+// });
 
 // Server Setup
 const port = process.env.PORT || 3090;
